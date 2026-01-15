@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissor Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+</head>
+
+<style>
+
+*{margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  background-color: #c7c7c7;
+  transition: background-color 0.3s ease;
+}
+@media (min-width: 769px) and (max-width: 1440px){
+  
+
+h2{
+  font-size: 36px;
+    height:50px;
+    color: white;
+    font-family: 'Montserrat';
+   font-style:oblique 10deg;;
+    line-height:70px;
+      letter-spacing: 0.3px;
+     top: -10px;
+      margin-bottom: 10px; 
+    position: relative;
+    text-align: center;
+    width:100%;
+   
+}
+#score-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+    font-weight:800;
+    font-size:20px; 
+     margin-top: 40px;
+}
+h5{
+  margin-top: 40px;
+  text-align: center;
+  font-weight:700;
+    font-size:22px;
+}
+.btns{
+  border: none;
+  border-radius: 50%;
+  background-color: #FF1800;
+    height:90px;
+   margin-right: 10px;
+    width:90px;
+  margin-top: 22px;
+  font-size: 35px;
+    text-align:center;
+
+}
+#rsp-txt{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size:32px;
+  margin-left:0px;
+   text-align:center;
+  font-weight: 800;
+}
+#rock{
+   margin-right:18px;
+     font-size:16px;
+}
+#paper{
+   margin-right:15px;
+   font-size:16px;
+}
+#scissor{
+   margin-right:17px;
+   font-size:16px;
+}
+#Message{
+  margin-top: 20px;
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight:800;
+  border-radius: 10px;
+  color:black;
+}
+#msg{
+  height: 50px;
+  width:210px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+   font-size:30px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+#GameOver{
+  color: #FF1800;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  animation: blink 0.8s infinite;
+}
+}
+
+.top-bar{
+  position: sticky;
+  top: 0;
+  height: 50px;
+  background: #FF1800;
+  z-index: 999;
+}
+
+h5{
+  text-align: center;
+  font-weight:700;
+    font-size:22px;
+}
+#rsp-txt{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 55px;
+  font-size:14px;
+  margin-left:10px;
+   text-align:center;
+  font-weight: 700;
+}
+#msg{
+  height: 50px;
+  width:190px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  margin: 15px auto;  
+   font-size:25px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+#Main-box{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.btns{
+  border: none;
+  border-radius: 50%;
+  background-color: #FF1800;
+    height:90px;
+    width:90px;
+  margin-top: 22px;
+  font-size: 35px;
+    text-align:center;
+
+}
+
+.btns:active{
+  box-shadow:
+    0 0 3px white,
+    0 0 8px white;
+  transform: scale(0.95);
+}
+#Reset{
+  display: none;
+  padding: 3px 25px;
+  background-color: red;
+  color:white;
+  border: none;
+  border-radius: 10px;
+  font-size:20px; 
+}
+
+#Message{
+  
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight:800;
+  border-radius: 10px;
+  color:black;
+}
+#score-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+    font-weight:800;
+    font-size:20px; 
+}
+#reset-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+#dark{
+  padding: 5px 18px;
+  z-index:1000;
+   position:fixed;
+   top:4px;  
+   right:1px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  background-color: #FF1800;
+  border: none;
+  font-size: 22px;
+}
+.blink{
+  animation: blink-2 0.4s ease-in 1;
+}
+
+@keyframes blink-2{
+  
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+#GameOver{
+  color: #FF1800;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  animation: blink 0.8s infinite;
+}
+@keyframes blink{
+  50%{opacity: 0.1;}
+}
+
+@media (max-width: 768px){
+  h2{
+    font-size: 28px;
+      line-height:1.8;
+       font-family: 'Montserrat';
+   font-style:oblique 10deg;;
+      position: relative;
+       text-align: center;
+        letter-spacing: 0.3px;
+         padding:6px 0;
+          color: white;
+  }
+
+  .btns{
+    width: 80px;
+    height: 80px;
+  }
+#rsp-txt{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 55px;
+  font-size:14px;
+  margin-left:10px;
+   text-align:center;
+  font-weight: 700;
+}
+#msg{
+  height: 50px;
+  width:190px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  margin: 15px auto;  
+   font-size:25px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+}
+@media (max-width: 480px){
+
+h2{
+   font-family: 'Montserrat';
+   font-style:oblique 10deg;;
+    width:100%;
+  background-color: #FF1800;
+  color: white;
+  display:block;
+  text-align: center;
+  line-height: 1.8;
+  font-size:22px;
+   padding:6px 0;
+  position:relative;
+  font-weight:800;
+  letter-spacing: 0.3px;
+    
+}
+h5{
+  text-align: center;
+  font-weight:700;
+    font-size:16px;
+}
+#rsp-txt{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 63px;
+  font-size:14px;
+  margin-left:10px;
+   text-align:center;
+  font-weight: 700;
+}
+#msg{
+  height: 50px;
+  width:190px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  margin: 15px auto;  
+   font-size:25px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+#score-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+    font-weight:800;
+    font-size:18px; 
+}
+.btns{
+  border: none;
+  border-radius: 50%;
+  background-color: #FF1800;
+    height:80px;
+    width:80px;
+  margin-top: 22px;
+  font-size: 25px;
+    text-align:center;
+
+}
+#Message{
+  
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight:800;
+  border-radius: 10px;
+  color:black;
+}
+#rock{
+  display: inline-block;
+   margin-left:1px;
+  
+     font-size:14px;
+}
+#paper{
+   margin-left:1px;
+  font-size: 14px;
+}
+#scissor{
+   margin-left:-10px;
+    font-size: 14px;
+}
+.rsp-txt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+#GameOver{
+  color: #FF1800;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  animation: blink 0.8s infinite;
+}
+}
+
+</style>
+
+<body class="isdark">
+    
+    <header class="top-bar">
+        <h2>Rock &nbsp;Paper &nbsp;Scissors</h2>
+    </header>
+    
+    <button onclick="Dark()" id="dark">
+       ☀ 
+    </button>
+
+    <br>
+    
+<div id="score-container">
+  <p id="Your-Score">You : 0</p>
+  <p>v/s</p>
+  <p id="Comp-Score">Computer : 0</p>
+</div>
+
+<br>
+
+<h5>Choose Your Move! </h5>
+
+
+ <div id="Main-box"> 
+ <button onclick="PlayGame('Rock')" class="btns" id="Rock">✊🏻</button>
+<button onclick="PlayGame('Paper')" class="btns"id="Paper">🖐🏻</button>
+<button onclick="PlayGame('Scissor')" class="btns"id="Scissor"> ✌🏻</button>
+  </div> 
+     
+    <div id="rsp-txt">
+      <p id="rock">Rock</p>
+      <p id="paper">Paper</p>
+      <p id="scissor">Scissor</p>
+    </div>
+
+  <p class="game-over" id="Message">
+      You Choose :
+      <br>
+      Computer Chose:
+  </p> 
+    
+
+          <p id="msg"></p>
+    
+  
+ <p id="GameOver"></p>
+    
+    
+    <div id="reset-container"  >
+<button onclick="ResetGame()" id="Reset">Reset</button>
+ </div>  
+    
+    
+ <script>
+    
+ let userScore = 0;
+let computerScore = 0;
+let gameOver = false;
+let reset ;
+
+const emojis = {
+  Rock: "✊🏻",
+  Paper: "🖐🏻",
+  Scissor: "✌🏻"
+};
+
+const choices = ["Rock", "Paper", "Scissor"];
+
+function PlayGame(userChoice) {
+  
+const computerMove = choices[Math.floor(Math.random() * 3)];
+ 
+  if(gameOver){
+     return;
+  }
+        
+       let result = "";
+    let mssg = "";
+
+    if (userChoice === computerMove) {
+    
+        result = `You   Chose : ${emojis[userChoice]} <br> 
+        Computer   Chose : ${emojis[computerMove]} `;
+       mssg = "Tie" ;
+        document.getElementById("msg").style.backgroundColor = '#e4eded';
+         document.getElementById("msg").style.color = '#505657';
+        
+      
+    }
+    else if (
+        (userChoice === "Rock" && computerMove === "Scissor") ||
+        (userChoice === "Scissor" && computerMove === "Paper") ||
+        (userChoice === "Paper" && computerMove === "Rock")
+    ) {
+        userScore++;
+        result = `You  Chose : ${emojis[userChoice]} <br>
+        Computer  Chose : ${emojis[computerMove]}`;
+        mssg = " You Win! 🎉 "; 
+         
+        document.getElementById("msg").style.backgroundColor = '#B1F727';
+         document.getElementById("msg").style.color = '#199e0d';
+          }
+    else {
+        computerScore++;
+        result = `You  Chose : ${emojis[userChoice]} <br>
+        Computer  Chose : ${emojis[computerMove]}`;
+        mssg = "Computer Wins!";
+        document.getElementById("msg").style.backgroundColor = '#f54336';
+        document.getElementById("msg").style.color = '#94150c';
+        
+        
+    }
+    
+       const msg = document.getElementById("msg");
+       msg.classList.remove("blink");
+       void msg.offsetWidth;
+       msg.classList.add("blink");
+
+         // 🎯 Game Over Condition
+    if (userScore === 10 || computerScore === 10) {
+        gameOver = true;
+      
+             setTimeout(() => { document.getElementById("GameOver").innerHTML =
+            "Game Over! Refresh or Reset to play again.";
+       
+      document.getElementById("Reset").style.display = "block";},1000 ) ;
+      
+        if (userScore === 10) {
+           
+           setTimeout( () => {alert("CONGRATULATIONS 🏆 ! YOU WON THE GAME !") },700);
+         } else {
+            
+         setTimeout( () => { alert(" 🖥️ COMPUTER WON THE GAME!")},700);
+         }
+    }
+    
+  
+
+    document.getElementById("Message").innerHTML = result;
+    document.getElementById("msg").innerHTML = mssg;
+   
+    document.getElementById("Your-Score").innerHTML =
+        `You : ${userScore} `;
+    
+    document.getElementById("Comp-Score").innerHTML =
+        `Computer : ${computerScore} `;
+
+
+document.getElementById("Message").style.display = "flex";
+  
+}
+   // reset game 🎯 
+    
+    function ResetGame(){
+      userScore = 0;
+      computerScore = 0;
+      gameOver = false;
+      
+      document.getElementById("Your-Score").textContent =
+        "You : 0 ";
+        document.getElementById("Comp-Score").textContent =
+        "Computer : 0 ";
+        
+         const msg = document.getElementById("msg");
+         msg.textContent = "";
+         msg.classList.remove("msg-win", "msg-lose", "msg-tie", "blink");
+         document.getElementById("msg").style.backgroundColor = "#c7c7c7";
+     
+        document.getElementById("Message").innerHTML = "You Chose :  <br> Computer Chose : ";
+        document.getElementById("GameOver").innerHTML = "";
+        document.getElementById("Reset").style.display = "none";
+        
+        
+    }
+    // Dark Mode Logic
+    let DarkMode = false;
+    function Dark(){
+    if(DarkMode === false){
+        document.body.style.backgroundColor = "#212121";
+        document.body.style.color = "white";
+      document.getElementById("Message").style.color ="white";
+        DarkMode = true;
+      document.getElementById("msg").style.cssText = `
+      backgroundColor:black
+      transition: none `;
+      document.getElementById("msg").style.transition = "none";
+
+              document.getElementById("msg").style.backgroundColor = "#212121";
+     document.body.classList.toggle("isdark");
+        document.getElementById("dark").style.color ="black";
+       
+    }
+    else{
+        document.body.style.backgroundColor = "#c7c7c7";
+    document.body.style.color = "black";
+      document.getElementById("Message").style.color ="black";
+        DarkMode = false;
+      document.getElementById("msg").style.backgroundColor = "#c7c7c7";
+     document.getElementById("msg").style.transition = "none";
+     document.getElementById("dark").style.color ="white";
+       
+    }
+}  
+    </script>
+ 
+ </body>
+</html>
